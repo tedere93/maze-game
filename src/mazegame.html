@@ -7,6 +7,9 @@
 
 	<p id="beta"></p>
     <p id="gamma"></p>
+    <button id="button" onclick="move(0)" style="margin-left: 25px;">U</button><br>
+    <button id="button" onclick="move(1)">L</button><button id="button" onclick="move(2)">D</button><button id="button" onclick="move(3)">R</button>
+    <br>
     <canvas width="400" height="400" id="mazecanvas" style="border:1px solid black;">Can't load the maze game, because your browser doesn't support HTML5.</canvas>
     <noscript>JavaScript is not enabled. To play the game, you should enable it.</noscript>
 
@@ -40,8 +43,46 @@
             context.fill();
         }
 
+        function move(direction){
+            if(direction==0){
+                newX = currRectX;
+                newY = currRectY - 3;
+                drawRectangle(newX, newY, "#0000FF");
+                currRectX = newX;
+                currRectY = newY;
+
+            } else if(direction==1){
+                newX = currRectX - 3;
+                newY = currRectY;
+                drawRectangle(newX, newY, "#0000FF");
+                currRectX = newX;
+                currRectY = newY;
+            } else if(direction==2){
+                newX = currRectX;
+                newY = currRectY + 3;
+                drawRectangle(newX, newY, "#0000FF");
+                currRectX = newX;
+                currRectY = newY;
+            } else if(direction==3){
+                newX = currRectX + 3;
+                newY = currRectY;
+                drawRectangle(newX, newY, "#0000FF");
+                currRectX = newX;
+                currRectY = newY;
+            }
+        }
+
+
+
         drawRectangle(150, 12, "#0000FF");
 
     </script>
+
+
+    <style type="text/css">
+    	#button{
+    		width: 25px;
+    	}
+    </style>
 </body>
 </html>
