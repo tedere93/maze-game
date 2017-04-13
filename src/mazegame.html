@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MazeGame</title>
+</head>
+<body>
+
+	<p id="beta"></p>
+    <p id="gamma"></p>
+    <canvas width="400" height="400" id="mazecanvas" style="border:1px solid black;">Can't load the maze game, because your browser doesn't support HTML5.</canvas>
+    <noscript>JavaScript is not enabled. To play the game, you should enable it.</noscript>
+
+    <script type="text/javascript">
+    	window.addEventListener("deviceorientation",ondevicemove);
+    	var canvas = document.getElementById("mazecanvas");
+        var context = canvas.getContext("2d");
+
+        function ondevicemove(event){
+        	
+        }
+    </script>
+</body>
+</html>
