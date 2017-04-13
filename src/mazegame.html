@@ -14,10 +14,34 @@
     	window.addEventListener("deviceorientation",ondevicemove);
     	var canvas = document.getElementById("mazecanvas");
         var context = canvas.getContext("2d");
+        var currRectX = 15;
+        var currRectY = 15;
 
         function ondevicemove(event){
-        	
+
         }
+
+        function makeWhite(x, y, w, h) {
+            context.beginPath();
+            context.rect(x, y, w, h);
+            context.closePath();
+            context.fillStyle = "white";
+            context.fill();
+        }
+
+        function drawRectangle(x, y, style) {
+            makeWhite(currRectX, currRectY, 15, 15);
+            currRectX = x;
+            currRectY = y;
+            context.beginPath();
+            context.rect(x, y, 15, 15);
+            context.closePath();
+            context.fillStyle = style;
+            context.fill();
+        }
+
+        drawRectangle(150, 12, "#0000FF");
+
     </script>
 </body>
 </html>
