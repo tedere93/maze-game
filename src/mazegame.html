@@ -5,8 +5,8 @@
 </head>
 <body>
 
-	<p id="beta"></p>
-    <p id="gamma"></p>
+	<p id="beta">beta</p>
+    <p id="gamma">gamma</p>
     <p id="currX">X</p>
     <p id="currY">Y</p>
     <p id="canMove">CanMove</p>
@@ -22,8 +22,8 @@
     	window.addEventListener("deviceorientation",ondevicemove);
     	var canvas = document.getElementById("mazecanvas");
         var context = canvas.getContext("2d");
-        var currRectX = 15;
-        var currRectY = 15;
+        var currRectX = 150;
+        var currRectY = 12;
         // var newX;
         // var newY;
         var mazeWidth = 556;
@@ -31,7 +31,13 @@
         var intervalVar;
 
         function ondevicemove(event){
+        	document.getElementById("beta").innerHTML=Math.round(event.beta);
+            document.getElementById("gamma").innerHTML=Math.round(event.gamma);
+        }
 
+        function draw(){
+            context.canvas.width = window.innerWidth;
+            drawRectangle(150, 12, "#0000FF");
         }
 
         function drawFinish() {
@@ -45,10 +51,12 @@
 
         function drawObstacles(){
             context.beginPath();
-            context.arc(200, 40, 17, 0, 2 * Math.PI, false);
+            context.moveTo(0, 0);
+            context.lineTo(300, 150);
+            for(var i=0;i<10;i++){
+                context.stroke();
+            }  
             context.closePath();
-            context.fillStyle = '#000000';
-            context.fill();
         }
 
         function makeWhite(x, y, w, h) {
@@ -159,16 +167,30 @@
 
 
 
-        drawRectangle(150, 12, "#0000FF");
+        // drawRectangle(150, 12, "#0000FF");
+        draw();
 
 
     </script>
 
 
     <style type="text/css">
+    	
     	#button{
     		width: 25px;
     	}
+
+    	html, body {
+            width: 100%;
+            height: 100%;
+			padding:0;
+            margin:0;
+        }
+
+        canvas{
+            display:block;
+        }
+
     </style>
 </body>
 </html>
