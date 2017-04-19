@@ -10,6 +10,8 @@
     <p id="currX">X</p>
     <p id="currY">Y</p>
     <p id="canMove">CanMove</p>
+    <p id="destX">destX</p>
+    <p id="destY">destY</p>
     <button id="button" onclick="move(0)" style="margin-left: 25px;">U</button><br>
     <button id="button" onclick="move(1)">L</button><button id="button" onclick="move(2)">D</button><button id="button" onclick="move(3)">R</button>
     <br>
@@ -22,8 +24,8 @@
         var context = canvas.getContext("2d");
         var currRectX = 15;
         var currRectY = 15;
-        var newX;
-        var newY;
+        // var newX;
+        // var newY;
         var mazeWidth = 556;
         var mazeHeight = 556;
         var intervalVar;
@@ -70,33 +72,67 @@
         }
 
         function move(direction){
+        	var movingAllowed;
+            var newX,newY;
+            var currX,currY;
             if(direction==0){
                 newX = currRectX;
                 newY = currRectY - 3;
+                currX =currRectX;
+                currY = currRectY;
                 drawRectangle(newX, newY, "#0000FF");
-                currRectX = newX;
-                currRectY = newY;
 
             } else if(direction==1){
                 newX = currRectX - 3;
                 newY = currRectY;
+                currX =currRectX;
+                currY = currRectY;
                 drawRectangle(newX, newY, "#0000FF");
-                currRectX = newX;
-                currRectY = newY;
+                
             } else if(direction==2){
                 newX = currRectX;
                 newY = currRectY + 3;
+                currX =currRectX;
+                currY = currRectY;
                 drawRectangle(newX, newY, "#0000FF");
-                currRectX = newX;
-                currRectY = newY;
+                
             } else if(direction==3){
                 newX = currRectX + 3;
                 newY = currRectY;
+                currX =currRectX;
+                currY = currRectY;
                 drawRectangle(newX, newY, "#0000FF");
-                currRectX = newX;
-                currRectY = newY;
+                
             }
+            movingAllowed = canMoveTo(newX, newY);
+            if (movingAllowed === 1) {      // 1 means 'the rectangle can move'
+                // drawRectangle(newX, newY, "#0000FF");
+                // currRectX = newX;
+                // currRectY = newY;
+                console.log("merge");
+            }
+            else if (movingAllowed === 2) { // 2 means 'the rectangle reached the end point'
+                clearInterval(intervalVar);
+                makeWhite(0, 0, canvas.width, canvas.height);
+                context.font = "40px Arial";
+                context.fillStyle = "blue";
+                context.textAlign = "center";
+                context.textBaseline = "middle";
+                context.fillText("Congratulations!", canvas.width / 2, canvas.height / 2);
+                console.log("ai castigat sefule!");
+            }
+            else if (movingAllowed===0){
+                console.log("nu merge aici!");
+                newX = currX;
+                newY = currY;
+                drawRectangle(currX, currY, "#0000FF");
+            }
+            document.getElementById("currX").innerHTML = newX;
+            document.getElementById("currY").innerHTML = newY;
+            document.getElementById("canMove").innerHTML = movingAllowed;
+            console.log(newX,newY,movingAllowed);
         }
+
 
         function canMoveTo(destX, destY) {
             var imgData = context.getImageData(destX, destY, 15, 15);
